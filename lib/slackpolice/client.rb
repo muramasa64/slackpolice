@@ -21,9 +21,13 @@ module Slackpolice
       archives
     end
 
-    def delete_expired_files
-      deleted_files = []
-
+    def delete_expired_files(ts_to = Date.today.prev_day(7))
+      Enumerator.new do |y|
+        expired_files(ts_to).each do |f|
+          resp = @client.files_delete('file' => f['id'])
+          y << f if resp['ok']
+        end
+      end
     end
 
     def no_members_channels
@@ -44,7 +48,7 @@ module Slackpolice
             end
           end
           page += 1
-        end while pages > page || 100 > page # over 100 page is not found. api bug?
+        end while pages >= page && 100 > page # over 100 page is not found. api bug?
       end
     end
   end

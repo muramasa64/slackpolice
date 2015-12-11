@@ -12,6 +12,23 @@ module Slackpolice
       end
     end
 
+    desc :remove_files, "remove expired files"
+    method_option :api_token, type: :string, required: true
+    method_option :days, type: :numeric, default: 7
+    method_option :dry_run, type: :boolean, default: false
+    def remove_files
+      dt = Date.today.prev_day(options['days'])
+      if options[:dry_run]
+        client.expired_files(dt).each do |f|
+          puts "deleted: #{Time.at(f['created'])} #{f['title']} (dry-run)"
+        end
+      else
+        client.delete_expired_files(dt).each do |f|
+          puts "deleted: #{Time.at(f['created'])} #{f['title']}"
+        end
+      end
+    end
+
     private
 
     def client
