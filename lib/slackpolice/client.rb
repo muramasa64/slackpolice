@@ -18,6 +18,7 @@ module Slackpolice
         resp = @client.channels_archive('channel' => c['id'])
         archives << c if resp['ok']
       end
+      archives
     end
 
     def delete_expired_files
