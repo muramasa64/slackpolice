@@ -1,28 +1,22 @@
 # Slackpolice
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/slackpolice`. To experiment with that code, run `bin/console` for an interactive prompt.
+Slackpolice is Slack administration tools.
 
-TODO: Delete this and the text above, and describe your gem
+* Archive non members channels.
+* Delete old files.
 
 ## Installation
-
-Add this line to your application's Gemfile:
-
-```ruby
-gem 'slackpolice'
-```
-
-And then execute:
-
-    $ bundle
-
-Or install it yourself as:
 
     $ gem install slackpolice
 
 ## Usage
 
-TODO: Write usage instructions here
+```
+Commands:
+  slackpolice archive --api-token=API_TOKEN       # archive no members channels
+  slackpolice help [COMMAND]                      # Describe available commands or one specific command
+  slackpolice remove_files --api-token=API_TOKEN  # remove expired files
+```
 
 ## Development
 
